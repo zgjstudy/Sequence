@@ -18,7 +18,7 @@ private:
 	int _t;
 	int _c;
 	int _g;
-	char data[100000];
+	int data[100000];
 	enum DATANB
 	{
 		A = 1,
