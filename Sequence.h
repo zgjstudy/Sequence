@@ -34,5 +34,3 @@ public:
 };
 
 #endif // SEQUENCE_H~~~
-
-
