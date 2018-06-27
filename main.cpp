@@ -15,5 +15,7 @@ int main()
 	cout << "Longest Repeated:" << endl;
 	cout << S.longestRepeated();
 
+	system("pause");
+
 	return 0;
 }

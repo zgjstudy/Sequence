@@ -10,6 +10,11 @@ Sequence::Sequence(string filename)
 		exit(0);
 	}
 	char c = ifs.get();
+
+	_a = 0;
+	_t = 0;
+	_c = 0;
+	_g = 0;
 	int i = 0;
 	while (c != EOF)
 	{
@@ -17,30 +22,35 @@ Sequence::Sequence(string filename)
 		{
 		case 'A':
 			_a++;
-			data[i++] = 1;
+			data += 'A';
 			break;
 		case 'T':
 			_t++;
-			data[i++] = 2;
+			data += 'T';
 			break;
 		case 'C':
 			_c++;
-			data[i++] = 3;
+			data += 'C';
 			break;
 		case 'G':
 			_g++;
-			data[i++] = 4;
+			data += 'G';
 			break;
 		default:
 			break;
 		}
 		c = ifs.get();
 	}
+
+	if (data.size() != _a + _t + _c + _g)
+	{
+		std::cerr << "ERROR in Reading" << std::endl;
+	}
 }
 
 int Sequence::length()
 {
-	return _a + _t + _c + _g;
+	return data.size();
 }
 
 int Sequence::numberOf(char base)
@@ -64,7 +74,7 @@ int Sequence::numberOf(char base)
 		return _g;
 		break;
 	default:
-		std::cerr << "illegal base";
+		std::cerr << "illegal base" << std::endl;
 		break;
 	}
 }
@@ -72,8 +82,8 @@ int Sequence::numberOf(char base)
 string Sequence::longestConsecutive()
 {
 	string rt;
-	int length = _a + _t + _c + _g;
-	int start = 0;
+	int length = data.size();
+	char start = 0;
 	int maxlength = 1;
 	int l = 1;
 
@@ -94,75 +104,13 @@ string Sequence::longestConsecutive()
 		}
 	}
 
-	switch (start)
-	{
-	case 1:
-		rt.assign(maxlength, 'A');
-		break;
-	case 2:
-		rt.assign(maxlength, 'T');
-		break;
-	case 3:
-		rt.assign(maxlength, 'C');
-		break;
-	case 4:
-		rt.assign(maxlength, 'G');
-		break;
-	default:
-		break;
-	}
-
+	rt.assign(maxlength, start);
+	
 	return rt;
 }
 
 string Sequence::longestRepeated()
 {
-	string rt;
-	int length = _a + _t + _c + _g;
-	int start = 0;
-	int maxlength = 0;
-	int pti, ptj;
-	int l = 0;
-
-	for (int i = 0; i < length; ++i)
-	{
-		for (int j = i + 1; j < length; ++j)
-		{
-			pti = i;
-			ptj = j;
-			while (pti < length && ptj < length && data[pti++] == data[ptj++])
-			{
-				l++;
-				if (l >= maxlength)
-				{
-					maxlength = l;
-					start = i;
-				}
-			}
-		}
-	}
-
-	for (int i = start; i < start + maxlength - 1; ++i)
-	{
-		switch (data[i])
-		{
-		case 1:
-			rt[i] = 'A';
-			break;
-		case 2:
-			rt[i] = 'T';
-			break;
-		case 3:
-			rt[i] = 'C';
-			break;
-		case 4:
-			rt[i] = 'G';
-			break;
-		default:
-			break;
-		}
-	}
-
-	return rt;
+	
 }
 
