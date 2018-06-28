@@ -18,15 +18,13 @@ int main()
 	start = clock();
 	cout << S.longestConsecutive() << endl;
 	end = clock();
-	cout << "The time was: " << (1.0 * end - start)/ CLK_TCK << endl << endl;
+	cout << "The time was: " << (1.0 * end - start) / CLOCKS_PER_SEC << endl << endl;
 
 	cout << "Longest Repeated:" << endl;
 	start = clock();
 	cout << S.longestRepeated() << endl;
 	end = clock();
-	cout << "The time was: " << (1.0 * end - start) / CLK_TCK << endl << endl;
-
-	system("pause");
+	cout << "The time was: " << (1.0 * end - start) / CLOCKS_PER_SEC << endl << endl;
 
 	return 0;
 }

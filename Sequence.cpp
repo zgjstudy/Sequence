@@ -15,7 +15,7 @@ int comlen(char* p1, char* p2)
 Sequence::Sequence(string filename)
 {
 	std::ifstream ifs;
-	ifs.open(filename);
+	ifs.open(filename.data());
 	if (!ifs.is_open())
 	{
 		std::cerr << "Can't open file!" << filename << std::endl;
