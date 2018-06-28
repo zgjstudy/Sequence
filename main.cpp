@@ -26,5 +26,7 @@ int main()
 	end = clock();
 	cout << "The time was: " << (1.0 * end - start) / CLOCKS_PER_SEC << endl << endl;
 
+	//system("pause");
+
 	return 0;
 }

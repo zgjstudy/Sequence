@@ -87,6 +87,7 @@ int Sequence::numberOf(char base)
 		break;
 	default:
 		std::cerr << "illegal base" << std::endl;
+		return -1;
 		break;
 	}
 }
