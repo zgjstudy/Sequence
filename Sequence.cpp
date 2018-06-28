@@ -132,8 +132,8 @@ string Sequence::longestRepeated()
 	int i = 0;
 	while (i < len)
 	{
-		c[i] = data[i];
-		a[i] = &c[i++];
+		a[i] = &c[i];
+		c[i] = data[i++];
 	}
 	c[i] = 0;
 	qsort(a, i, sizeof(char*), pstrcmp);
