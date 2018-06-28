@@ -97,7 +97,7 @@ string Sequence::longestConsecutive()
 	string rt;
 	int length = data.size();
 	char start = data[0];
-	int maxlength = 1;
+	int maxlen = 1;
 	int l = 1;
 
 	for (int i = 1; i < length; ++i)
@@ -105,10 +105,10 @@ string Sequence::longestConsecutive()
 		if (data[i] == data[i - 1])
 		{
 			l++;
-			if (l > maxlength)
+			if (l > maxlen)
 			{
 				start = data[i];
-				maxlength = l;
+				maxlen = l;
 			}
 		}
 		else
@@ -117,7 +117,7 @@ string Sequence::longestConsecutive()
 		}
 	}
 
-	rt.assign(maxlength, start);
+	rt.assign(maxlen, start);
 	
 	return rt;
 }
@@ -126,33 +126,33 @@ string Sequence::longestRepeated()
 {
 	string rt;
 	int len = data.size();
-	char* c = new char[len + 100];
-	char** a = new char*[len + 100];
-	int maxlen = -1, maxi = 0;
+	char* datatemp = new char[len + 100];
+	char** suffixArray = new char*[len + 100];
+	int maxlen = -1, maxstart = 0;
 
 	int i = 0;
 	while (i < len)
 	{
-		a[i] = &c[i];
-		c[i] = data[i];
+		suffixArray[i] = &datatemp[i];
+		datatemp[i] = data[i];
 		i++;
 	}
-	c[i] = 0;
-	qsort(a, i, sizeof(char*), pstrcmp);
+	datatemp[i] = 0;
+	qsort(suffixArray, i, sizeof(char*), pstrcmp);
 
 	for (int i = 0; i < len - 1; ++i)
 	{
-		if (comlen(a[i], a[i + 1]) > maxlen)
+		if (comlen(suffixArray[i], suffixArray[i + 1]) > maxlen)
 		{
-			maxlen = comlen(a[i], a[i + 1]);
-			maxi = i;
+			maxlen = comlen(suffixArray[i], suffixArray[i + 1]);
+			maxstart = i;
 		}
 	}
 	
-	rt.assign(a[maxi], maxlen);
+	rt.assign(suffixArray[maxstart], maxlen);
 
-	delete[]c;
-	delete[]a;
+	delete[]datatemp;
+	delete[]suffixArray;
 
 	return rt;
 }
